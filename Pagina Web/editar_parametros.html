@@ -1,0 +1,287 @@
+<html>
+<head>
+	<style>
+		body
+		{ 
+		background: #1975FF ; 
+		}
+	</style>
+	<script type="text/javascript">
+		function desabilitarElementos(){
+			//desabilitar todos los elementos
+			var todosLosElementos = document.getElementById("divApagado").getElementsByTagName('*');
+			for(var i = 0; i < todosLosElementos.length; i++){
+				todosLosElementos[i].disabled = true;
+			}
+		}
+		function llenarHorasEncendido(){
+			var selection = document.getElementById('horaEncendido');
+			
+			
+			for(var i = 0; i < 24; i++) {
+				var optionItem = document.createElement('option');
+				optionItem.innerHTML = i;
+				optionItem.value = i;
+				selection.appendChild(optionItem);
+			
+			}
+		}
+		function llenarMinutosEncendido(){
+		
+			var seleccionMinuto = document.getElementById('minutoParo');
+			var mParo = seleccionMinuto.selectedIndex;
+			
+			var seleccionDia=document.getElementById('diaParo');
+			var dParo = seleccionDia.selectedIndex;
+			
+			var seleccionDia=document.getElementById('diaEncendido');
+			var dEncendido = seleccionDia.selectedIndex;
+			
+			var selectionHora = document.getElementById('horaEncendido');
+			var hEncendido = selectionHora.selectedIndex;
+			
+			var selectionHora = document.getElementById('horaParo');
+		    var hParo = selectionHora.selectedIndex;
+		
+		
+			var selection = document.getElementById('minutoEncendido');	
+			
+			for(var i = 0; i < 60; i++) {
+				if((mParo-1)==i && dParo == dEncendido && hEncendido == hParo){
+					
+				}else{
+					var optionItem = document.createElement('option');
+					optionItem.innerHTML = i;
+					optionItem.value = i;
+					selection.appendChild(optionItem);
+				}
+			}
+		}	
+		function mostrar(){
+			var div_Encendido = document.getElementById('divEncendido');
+			
+			//seleccionamos todos los dropdowns de  paro y tomamos el valor.
+			var seleccionDia=document.getElementById('diaParo');
+			var dParo = seleccionDia.selectedIndex;
+			
+			
+			var seleccionHora=document.getElementById('horaParo');
+			var hParo = seleccionHora.selectedIndex;
+			
+			
+			var seleccionMinuto = document.getElementById('minutoParo');
+			var mParo = seleccionMinuto.selectedIndex;
+		
+			
+			if((dParo == 0 ) || (hParo == 0 ) || (mParo == 0)){
+				div_Encendido.style.display = 'none';
+			}
+			else{
+				div_Encendido.style.display = 'block' ;
+			}
+		}			
+		function guardarCambios(){
+			var btn_guardar = document.getElementById('guardar');
+			
+			//seleccionamos todos los dropdowns de  Encendido y tomamos el valor.
+			var seleccionDia=document.getElementById('diaEncendido');
+			var dEncendido = seleccionDia.selectedIndex;
+			
+			
+			var seleccionHora=document.getElementById('horaEncendido');
+			var hEncendido = seleccionHora.selectedIndex;
+			
+			
+			var seleccionMinuto = document.getElementById('minutoEncendido');
+			var mEncendido = seleccionMinuto.selectedIndex;
+			
+			
+			if((dEncendido == -1 ) || (hEncendido == -1 ) || (mEncendido == -1)){
+				btn_guardar.disabled = true;
+			}
+			else{
+				btn_guardar.disabled = false ;
+			}
+		}
+	</script>	
+</head>
+<body>
+	<form name="principal"   method="POST">
+		<div id="NC" align="center" Style="background-color:#1975FF;border:5px #1252B2 ridge;">
+			<b><p style="color: #000000; font-size: 18pt" align="center">
+				<label for="CambioNombre">Nombre de Estaci&oacute;n</label>
+			</p></b>
+			<b> Nombre de Estaci&oacute;n: <input id="nombre" type="text" name="nombre" maxlength="49"></b>
+			<input  id="guardarNombre" type="submit"  name="guardarNombre" onclick = "this.form.action = 'cambiar_nombre.php'" value="Guardar Nombre" />
+			<p style="color: #000000; font-size: 10pt" align="center">
+				*NOTA: Llenar campo solo si se quiere cambiar el nombre de la estaci&oacute;n. 
+		</div>
+		<div id="divApagado" align="center" Style="background-color:#1975FF;border:5px #1252B2 ridge;">
+			<b>
+				<p style="color: #000000; font-size: 18pt" align="center">
+					<label for="SelecionParo">Configuraci&oacute;n de Apagado de Equipo</label>
+				</p>
+			</b>
+			<label for="Dia_Paro">Dia</label>
+			<select id="diaParo" name="diaParo">
+				<option value="-1">--</option>
+				<option value="1">Domingo</option>
+				<option value="2">Lunes</option>
+				<option value="3">Martes</option>
+				<option value="4">Miercoles</option>
+				<option value="5">Jueves</option>
+				<option value="6">Viernes</option>
+				<option value="7">Sabado</option>
+			</select>
+			<label for="hora_Paro">Hora</label>
+			<select id="horaParo" name="horaParo">
+				<option value="-1">--</option>
+				<option value="00">0</option>
+				<option value="01">1</option>
+				<option value="02">2</option>
+				<option value="03">3</option>
+				<option value="04">4</option>
+				<option value="05">5</option>
+				<option value="06">6</option>
+				<option value="07">7</option>
+				<option value="08">8</option>
+				<option value="09">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				
+			</select>
+			<label for="minuto_Paro">Minuto</label>
+			<select id="minutoParo" name="minutoParo">
+				<option value="-1">--</option>
+				<option value="00">0</option>
+				<option value="01">1</option>
+				<option value="02">2</option>
+				<option value="03">3</option>
+				<option value="04">4</option>
+				<option value="05">5</option>
+				<option value="06">6</option>
+				<option value="07">7</option>
+				<option value="08">8</option>
+				<option value="09">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+				<option value="31">31</option>
+				<option value="32">32</option>
+				<option value="33">33</option>
+				<option value="34">34</option>
+				<option value="35">35</option>
+				<option value="36">36</option>
+				<option value="37">37</option>
+				<option value="38">38</option>
+				<option value="39">39</option>
+				<option value="40">40</option>
+				<option value="41">41</option>
+				<option value="42">42</option>
+				<option value="43">43</option>
+				<option value="44">44</option>
+				<option value="45">45</option>
+				<option value="46">46</option>
+				<option value="47">47</option>
+				<option value="48">48</option>
+				<option value="49">49</option>
+				<option value="50">50</option>
+				<option value="51">51</option>
+				<option value="52">52</option>
+				<option value="53">53</option>
+				<option value="54">54</option>
+				<option value="55">55</option>
+				<option value="56">56</option>
+				<option value="57">57</option>
+				<option value="58">58</option>
+				<option value="59">59</option>
+				
+			</select>
+			<input id="botonOk" type="button" onclick="mostrar()" value = "OK"/>
+		</div>		
+		<div  id="divEncendido" align="center" Style="background-color:#1975FF;border:5px #1252B2 ridge;display:none;">
+			<b>	
+			<p style="color: #000000; font-size: 18pt" align="center">
+				<label for="SelecionArranque">Configuraci&oacute;n de Arranque de Equipo</label>
+			</p>
+			</b>
+			<label for="Dia_Encendido">Dia</label>
+			<select id="diaEncendido" name="diaEncendido" >
+				<option value="-1">--</option>
+				<option value="1">Domingo</option>
+				<option value="2">Lunes</option>
+				<option value="3">Martes</option>
+				<option value="4">Miercoles</option>
+				<option value="5">Jueves</option>
+				<option value="6">Viernes</option>
+				<option value="7">Sabado</option>
+			</select>
+			<label for="hora_Encendido">Hora</label>
+			<select id="horaEncendido"name="horaEncendido" onchange="llenarMinutosEncendido()">
+				<option value="-1">--</option>
+				<option value="00">0</option>
+				<option value="01">1</option>
+				<option value="02">2</option>
+				<option value="03">3</option>
+				<option value="04">4</option>
+				<option value="05">5</option>
+				<option value="06">6</option>
+				<option value="07">7</option>
+				<option value="08">8</option>
+				<option value="09">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+			</select>
+			<label for="minuto_Encendido">Minuto</label>
+			<select id="minutoEncendido" name="minutoEncendido" onchange="guardarCambios()">
+				<option value="-1">--</option>
+			</select>
+			<b>
+				<input  id="guardar" onclick = "this.form.action = 'guardar.php'" type="submit"  name="submit" value="Guardar" disabled="disabled" />
+			</b>
+		</div>
+	</form>
+</body>
+</html>
